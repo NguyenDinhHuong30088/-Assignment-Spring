@@ -1,6 +1,7 @@
 package com.example.hellospring.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,8 +14,8 @@ public class ProductApi {
     ProductService productService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public  List<Product> getList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit){
-        return productService.findAll();
+    public Page<Product> getList(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit){
+        return productService.findAll(page,limit);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
